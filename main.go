@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"social-todo-list/middleware"
 	ginitem "social-todo-list/module/item/transport/gin"
 )
 
@@ -23,6 +24,12 @@ func main() {
 	log.Println("DB Connection:", db)
 	//////////////////////////
 	r := gin.Default()
+
+	r.Use(middleware.Recover())
+
+	r.Static("/static", "./static")
+
+	r.Static("/static", "./static")
 
 	v1 := r.Group("/v1")
 	{
