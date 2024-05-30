@@ -13,6 +13,8 @@ import (
 
 func main() {
 	dsn := os.Getenv("DB_CONN")
+	//systemSecret := os.Getenv("SECRET")
+
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 
 	if err != nil {
@@ -23,6 +25,10 @@ func main() {
 
 	log.Println("DB Connection:", db)
 	//////////////////////////
+	//authStore := storage.NewSQLStore(db)
+	//tokenProvider := jwt.NewTokenJWTProvider("jwt", systemSecret)
+	//middlewareAuth := middleware.RequiredAuth(authStore, tokenProvider)
+
 	r := gin.Default()
 
 	r.Use(middleware.Recover())
